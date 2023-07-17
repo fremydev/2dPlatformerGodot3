@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/player/character_0000.png" type="Texture" id=2]
 [ext_resource path="res://scenes/GameCamera.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 10 )
 
 [node name="Main" type="Node"]
 
@@ -13,13 +17,18 @@ format = 1
 tile_data = PoolIntArray( 327693, 0, 0, 327705, 0, 0, 393229, 0, 0, 393241, 0, 0, 458765, 0, 0, 458777, 0, 0, 524301, 0, 0, 524313, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589849, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 720909, 0, 0, 720921, 0, 0, 786445, 0, 0, 786457, 0, 0, 851981, 0, 0, 851993, 0, 0, 917517, 0, 0, 917529, 0, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 320, 163 )
+position = Vector2( 322, 135 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
 texture = ExtResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2( 320, 180 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.25, 0.25 )
 script = ExtResource( 3 )
