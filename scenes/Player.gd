@@ -9,9 +9,7 @@ var velocity: Vector2 = Vector2.ZERO
 
 
 func _process(delta):
-	var move_vector: Vector2 = Vector2.ZERO
-	move_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	move_vector.y = -1 if Input.is_action_just_pressed("jump") else 0
+	var move_vector: Vector2 = get_movement_vector()
 	
 	velocity.x += move_vector.x * HORIZONTALAC * delta
 	if move_vector.x == 0:
@@ -28,3 +26,10 @@ func _process(delta):
 		velocity.y += GRAVITY * delta
 		
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func get_movement_vector() -> Vector2:
+	var move_vector: Vector2 = Vector2.ZERO
+	move_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	move_vector.y = -1 if Input.is_action_just_pressed("jump") else 0
+	return move_vector
