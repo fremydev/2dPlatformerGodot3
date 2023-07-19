@@ -13,6 +13,10 @@ config_version=4
 config/name="2DPlatformer3.5"
 run/main_scene="res://scenes/view.tscn"
 
+[autoload]
+
+_global="*res://singleton.gd"
+
 [display]
 
 window/size/width=1280
