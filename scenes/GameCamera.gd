@@ -7,9 +7,9 @@ func _ready() -> void:
 	VisualServer.set_default_clear_color(BGCOLOR)
 
 
-func _process(delta):
+func _physics_process(delta):
 	acquire_target_position()
-	global_position = lerp(target_position, global_position, pow(2, -40 * delta))
+	global_position = lerp(target_position, global_position, pow(2, -45 * delta))
 
 
 func acquire_target_position() -> void:

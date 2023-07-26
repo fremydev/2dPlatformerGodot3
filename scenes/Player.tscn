@@ -28,6 +28,10 @@ extents = Vector2( 5, 10 )
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 script = ExtResource( 1 )
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.12
+one_shot = true
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -12 )
 frames = SubResource( 2 )
