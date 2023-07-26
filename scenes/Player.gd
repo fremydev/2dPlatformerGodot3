@@ -7,7 +7,6 @@ const HORIZONTALAC: int = 2200
 const JUMPTERMULT: int = 4
 var velocity: Vector2 = Vector2.ZERO
 
-
 func _process(delta):
 	var move_vector: Vector2 = get_movement_vector()
 	
@@ -26,10 +25,26 @@ func _process(delta):
 		velocity.y += GRAVITY * delta
 		
 	velocity = move_and_slide(velocity, Vector2.UP)
-
+	#position = Vector2(round(position.x), round(position.y))
+	
+	update_animation()
 
 func get_movement_vector() -> Vector2:
 	var move_vector: Vector2 = Vector2.ZERO
 	move_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	move_vector.y = -1 if Input.is_action_just_pressed("jump") else 0
 	return move_vector
+
+
+func update_animation() -> void:
+	var move_vec: Vector2 = get_movement_vector()
+	
+	if !is_on_floor():
+		$AnimatedSprite.play("jump")
+	elif move_vec.x != 0:
+		$AnimatedSprite.play("run")
+	else:
+		$AnimatedSprite.play("idle")
+	
+	if move_vec.x != 0:
+		$AnimatedSprite.flip_h = true if move_vec.x > 0 else false

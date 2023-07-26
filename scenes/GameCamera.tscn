@@ -5,5 +5,4 @@
 [node name="GameCamera" type="Camera2D"]
 position = Vector2( 320, 180 )
 current = true
-zoom = Vector2( 0.25, 0.25 )
 script = ExtResource( 1 )
