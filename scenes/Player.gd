@@ -6,6 +6,7 @@ const JUMPSPEED: int = 360
 const HORIZONTALAC: int = 2200
 const JUMPTERMULT: int = 4
 var velocity: Vector2 = Vector2.ZERO
+var has_double_jump: bool = false
 
 func _physics_process(delta):
 	var move_vector: Vector2 = get_movement_vector()
@@ -16,8 +17,10 @@ func _physics_process(delta):
 		
 	velocity.x = clamp(velocity.x, -MAXHSPEED, MAXHSPEED)
 	
-	if move_vector.y < 0 and (is_on_floor() or !$CoyoteTimer.is_stopped()):
+	if move_vector.y < 0 and (is_on_floor() or !$CoyoteTimer.is_stopped() or has_double_jump):
 		velocity.y = move_vector.y * JUMPSPEED
+		if !is_on_floor() and $CoyoteTimer.is_stopped(): has_double_jump = false
+		$CoyoteTimer.stop()
 		
 	if velocity.y < 0 and !Input.is_action_pressed("jump"):
 		velocity.y += GRAVITY * JUMPTERMULT * delta
@@ -29,6 +32,9 @@ func _physics_process(delta):
 	
 	if was_on_floor and !is_on_floor():
 		$CoyoteTimer.start()
+		
+	if is_on_floor():
+		has_double_jump = true
 	
 	update_animation()
 	
