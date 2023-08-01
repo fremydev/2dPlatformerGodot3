@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Coin.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node"]
 
@@ -16,3 +17,6 @@ tile_data = PoolIntArray( 65566, 1, 0, 65567, 1, 1, 65568, 1, 1, 65569, 1, 2, 13
 position = Vector2( 355, 175 )
 
 [node name="GameCamera" parent="." instance=ExtResource( 3 )]
+
+[node name="Coin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 257, 101 )
