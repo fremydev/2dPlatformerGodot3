@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal died
+
 const GRAVITY: int = 1000
 const MAXHSPEED: int = 133
 const JUMPSPEED: int = 360
@@ -7,6 +9,9 @@ const HORIZONTALAC: int = 2200
 const JUMPTERMULT: int = 4
 var velocity: Vector2 = Vector2.ZERO
 var has_double_jump: bool = false
+
+func _read():
+	$HazardArea.connect("area_entered", self, "on_hazard_area_entered")
 
 func _physics_process(delta):
 	var move_vector: Vector2 = get_movement_vector()
@@ -66,3 +71,7 @@ func update_animation() -> void:
 		$AnimatedSprite.rotation_degrees = -4
 	else:
 		 $AnimatedSprite.rotation_degrees = 0
+
+
+func on_hazard_area_entered(_area2d: Area2D) -> void:
+	emit_signal("died")
